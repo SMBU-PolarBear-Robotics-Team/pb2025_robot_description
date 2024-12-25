@@ -14,6 +14,8 @@ SMBU PolarBear Team robot description package for RoboMaster 2025.
 
     搭载云台相机 industrial_camera 和激光雷达 rplidar_a2 和 Livox mid360，其中相机与 gimbal_pitch 轴固连，mid360 倾斜侧放与 chassis 固连。
 
+    ![sentry](https://raw.githubusercontent.com/LihanChen2004/picx-images-hosting/master/sentry_description.1sf3yc69kr.webp)
+
 ## 2. 环境配置
 
 - Ubuntu 22.04
@@ -58,11 +60,11 @@ SMBU PolarBear Team robot description package for RoboMaster 2025.
 
 - 通过 Python API，在 launch file 中解析 xmacro 文件，生成 URDF 和 SDF 文件（推荐）
 
-    > [!NOTE]
+    > Tips:
     >
-    > [robot_state_publisher](https://github.com/ros/robot_state_publisher) 传入参数 `robot_description` 需要为 urdf 格式的机器人描述文件
+    > [robot_state_publisher](https://github.com/ros/robot_state_publisher) 需要传入 urdf 格式的机器人描述文件
     >
-    > Gazebo 仿真器 spawn robot 时，需要传入 sdf 格式的机器人描述文件
+    > Gazebo 仿真器 spawn robot 时，需要传入 sdf / urdf 格式的机器人描述文件
 
     感谢前辈的开源工具 [xmacro](https://github.com/gezp/xmacro) 和 [sdformat_tools](https://github.com/gezp/sdformat_tools) ，这里简述 xmacro 转 urdf 和 sdf 的示例，用于在 launch file 中生成 URDF 和 SDF 文件。
 
@@ -83,7 +85,7 @@ SMBU PolarBear Team robot description package for RoboMaster 2025.
     robot_urdf_xml = urdf_generator.to_string()
     ```
 
-- 命令行直接转换输出 sdf 文件（不推荐）
+- 通过命令行直接转换输出 sdf 文件（不推荐）
 
     ```bash
     source install/setup.bash
