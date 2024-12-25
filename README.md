@@ -26,7 +26,7 @@ SMBU PolarBear Team robot description package for RoboMaster 2025.
     注：若同一工作空间中已克隆过 rmoss_gz_resources 和 sdformat_tools，请跳过此克隆步骤。
 
     ```bash
-    git clone https://github.com/LihanChen2004/rmoss_gz_resources.git --depth=1
+    git clone https://github.com/SMBU-PolarBear-Robot-Team/rmoss_gz_resources.git --depth=1
     git clone https://github.com/gezp/sdformat_tools.git
     ```
 
