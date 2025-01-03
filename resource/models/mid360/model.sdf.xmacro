@@ -7,6 +7,13 @@
       <parent>${parent}</parent>
       <child>${prefix}mid360</child>
     </joint>
+
+    <joint name="${prefix}livox_imu_joint" type="fixed">
+      <pose relative_to="${parent}">0 0 0 0 0 0</pose>
+      <parent>${prefix}mid360</parent>
+      <child>${prefix}mid360_imu</child>
+    </joint>
+
     <link name="${prefix}mid360">
       <pose relative_to="${prefix}livox_joint">0.0 0.0 0.0 0 0 0</pose>
       <inertial>
@@ -21,12 +28,6 @@
           </mesh>
         </geometry>
       </visual>
-
-      <sensor name="${prefix}mid360_imu" type="imu">
-        <always_on>1</always_on>
-        <update_rate>200</update_rate>
-        <visualize>true</visualize>
-      </sensor>
 
       <sensor name="${prefix}mid360_lidar" type="gpu_lidar">
         <ignition_frame_id>${prefix}mid360</ignition_frame_id>
@@ -58,6 +59,16 @@
           <mean>0.0</mean>
           <stddev>0.01</stddev>
         </noise>
+      </sensor>
+    </link>
+
+    <link name="${prefix}mid360_imu">
+      <pose relative_to="${prefix}livox_imu_joint">0.0 0.0 0.0 0 0 0</pose>
+      <sensor name="${prefix}mid360_imu" type="imu">
+        <ignition_frame_id>${prefix}mid360_imu</ignition_frame_id>
+        <always_on>1</always_on>
+        <update_rate>200</update_rate>
+        <visualize>true</visualize>
       </sensor>
     </link>
   </xmacro_define_block>

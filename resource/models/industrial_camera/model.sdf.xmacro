@@ -21,6 +21,7 @@
                 <xmacro_block name="geometry_box" x="0.08" y="0.025" z="0.033" />
             </collision>
             <sensor name="${prefix}industrial_camera" type="camera">
+                <ignition_frame_id>${prefix}industrial_camera</ignition_frame_id>
                 <always_on>1</always_on>
                 <update_rate>${update_rate}</update_rate>
                 <camera>
