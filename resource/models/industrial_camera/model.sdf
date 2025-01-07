@@ -69,10 +69,10 @@
 				</geometry>
 			</collision>
 			<sensor name="simple_industrial_camera" type="camera">
-				<ignition_frame_id>simple_industrial_camera</ignition_frame_id>
 				<always_on>1</always_on>
 				<update_rate>30.0</update_rate>
 				<camera>
+					<optical_frame_id>simple_industrial_camera_optical_frame</optical_frame_id>
 					<horizontal_fov>1.0</horizontal_fov>
 					<image>
 						<width>640.0</width>
@@ -84,6 +84,14 @@
 					</clip>
 				</camera>
 			</sensor>
+		</link>
+		<joint name="simple_industrial_camera_optical_joint" type="fixed">
+			<pose relative_to="simple_industrial_camera">0 0 0 -1.5707963267948966 0 -1.5707963267948966</pose>
+			<parent>simple_industrial_camera</parent>
+			<child>simple_industrial_camera_optical_frame</child>
+		</joint>
+		<link name="simple_industrial_camera_optical_frame">
+			<pose relative_to="simple_industrial_camera_optical_joint">0 0 0 0 0 0</pose>
 		</link>
 	</model>
 </sdf>
