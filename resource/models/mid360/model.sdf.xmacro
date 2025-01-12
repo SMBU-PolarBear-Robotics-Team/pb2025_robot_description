@@ -50,8 +50,8 @@
             </vertical>
           </scan>
           <range>
-            <min>0.15</min>
-            <max>15.0</max>
+            <min>0.1</min>
+            <max>40.0</max>
           </range>
         </ray>
         <noise>
