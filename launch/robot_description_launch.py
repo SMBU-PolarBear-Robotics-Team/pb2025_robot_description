@@ -16,6 +16,14 @@ def launch_setup(context: LaunchContext) -> list:
     But it is too hacky and not recommended.
     """
 
+    # Map fully qualified names to relative ones so the node's namespace can be prepended.
+    # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
+    # https://github.com/ros/geometry2/issues/32
+    # https://github.com/ros/robot_state_publisher/pull/30
+    # TODO(orduno) Substitute with `PushNodeRemapping`
+    #              https://github.com/ros2/launch_ros/issues/56
+    remappings = [("/tf", "tf"), ("/tf_static", "tf_static")]
+
     # Load the robot xmacro file from the launch configuration
     xmacro = XMLMacro4sdf()
     xmacro.set_xml_file(context.launch_configurations["robot_xmacro_file"])
@@ -39,6 +47,7 @@ def launch_setup(context: LaunchContext) -> list:
                 "use_sim_time": LaunchConfiguration("use_sim_time"),
             }
         ],
+        remappings=remappings,
     )
 
     start_robot_state_publisher_node = Node(
@@ -52,6 +61,7 @@ def launch_setup(context: LaunchContext) -> list:
                 "robot_description": robot_urdf_xml,
             }
         ],
+        remappings=remappings,
     )
 
     start_rviz_node = Node(
@@ -59,6 +69,7 @@ def launch_setup(context: LaunchContext) -> list:
         executable="rviz2",
         arguments=["-d", LaunchConfiguration("rviz_config_file")],
         output="screen",
+        remappings=remappings,
     )
 
     return [
@@ -78,10 +89,10 @@ def generate_launch_description():
         description="Use simulation (Gazebo) clock if true",
     )
 
-    declare_robot_xmacro_name_cmd = DeclareLaunchArgument(
-        "robot_xmacro_name",
+    declare_robot_name_cmd = DeclareLaunchArgument(
+        "robot_name",
         default_value="pb2025_sentry_robot",
-        description="The name of the robot xmacro to be used",
+        description="The file name of the robot xmacro to be used",
     )
 
     declare_robot_xmacro_file_cmd = DeclareLaunchArgument(
@@ -89,7 +100,7 @@ def generate_launch_description():
         default_value=[
             # Use TextSubstitution to concatenate strings
             TextSubstitution(text=os.path.join(bringup_dir, "resource", "xmacro", "")),
-            LaunchConfiguration("robot_xmacro_name"),
+            LaunchConfiguration("robot_name"),
             TextSubstitution(text=".sdf.xmacro"),
         ],
         description="The file path of the robot xmacro to be used",
@@ -106,7 +117,7 @@ def generate_launch_description():
 
     # Declare the launch options
     ld.add_action(declare_use_sim_time_cmd)
-    ld.add_action(declare_robot_xmacro_name_cmd)
+    ld.add_action(declare_robot_name_cmd)
     ld.add_action(declare_robot_xmacro_file_cmd)
     ld.add_action(declare_rviz_config_file_cmd)
 

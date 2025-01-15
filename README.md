@@ -55,7 +55,7 @@ SMBU PolarBear Team robot description package for RoboMaster 2025.
 - 编写了一个用于测试的 launch 文件，可以在 RViz 中查看机器人模型
 
     ```bash
-    ros2 launch pb2025_robot_description test_robot_description_launch.py
+    ros2 launch pb2025_robot_description robot_description_launch.py
     ```
 
 - 通过 Python API，在 launch file 中解析 xmacro 文件，生成 URDF 和 SDF 文件（推荐）
