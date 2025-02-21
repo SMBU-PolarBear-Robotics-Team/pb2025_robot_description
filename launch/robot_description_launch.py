@@ -18,6 +18,7 @@ def launch_setup(context: LaunchContext) -> list:
 
     use_sim_time = LaunchConfiguration("use_sim_time")
     source_list = LaunchConfiguration("source_list")
+    offset_timestamp = LaunchConfiguration("offset_timestamp")
     rviz_config_file = LaunchConfiguration("rviz_config_file")
     use_rviz = LaunchConfiguration("use_rviz")
     use_respawn = LaunchConfiguration("use_respawn")
@@ -62,6 +63,7 @@ def launch_setup(context: LaunchContext) -> list:
                 "use_sim_time": use_sim_time,
                 "rate": 200,
                 "source_list": source_list,
+                "offset_timestamp": offset_timestamp,
             }
         ],
         arguments=["--ros-args", "--log-level", log_level],
@@ -136,6 +138,12 @@ def generate_launch_description():
         description="Array of topic names for subscriptions to sensor_msgs/msg/JointStates. Defaults to ['serial/gimbal_joint_state']",
     )
 
+    declare_offset_timestamp_cmd = DeclareLaunchArgument(
+        "offset_timestamp",
+        default_value="0.0",
+        description="Offset timestamp for joint state publisher",
+    )
+
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         "rviz_config_file",
         default_value=os.path.join(bringup_dir, "rviz", "visualize_robot.rviz"),
@@ -164,6 +172,7 @@ def generate_launch_description():
     ld.add_action(declare_robot_name_cmd)
     ld.add_action(declare_robot_xmacro_file_cmd)
     ld.add_action(declare_source_list_cmd)
+    ld.add_action(declare_offset_timestamp_cmd)
     ld.add_action(declare_rviz_config_file_cmd)
     ld.add_action(declare_use_rviz_cmd)
     ld.add_action(declare_use_respawn_cmd)
