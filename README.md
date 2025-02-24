@@ -65,17 +65,17 @@ colcon build --symlink-install
 
 ### 2.4 Running
 
-#### 2.4.1 在 RViz 中可视化机器人
+#### Option1: 在 RViz 中可视化机器人
 
 ```bash
 ros2 launch pb2025_robot_description robot_description_launch.py
 ```
 
-#### 2.4.2 Python API
+#### Option2: Python API
 
 通过 Python API，在 launch file 中解析 XMacro 文件，生成 URDF 和 SDF 文件 (Recommend)：
 
-> [!TIP]:
+> [!TIP]
 >
 > [robot_state_publisher](https://github.com/ros/robot_state_publisher) 需要传入 urdf 格式的机器人描述文件
 >
@@ -100,7 +100,7 @@ urdf_generator.parse_from_sdf_string(robot_xml)
 robot_urdf_xml = urdf_generator.to_string()
 ```
 
-#### 2.4.3 命令行
+#### Option3: 命令行
 
 通过命令行直接转换输出 SDF 文件（Not Recommend）:
 
