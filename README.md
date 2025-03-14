@@ -14,7 +14,7 @@ SMBU PolarBear Team robot description package for RoboMaster 2025.
 
 当前机器人描述文件基于 [rmua19_standard_robot](https://github.com/robomaster-oss/rmoss_gz_resources/tree/humble/resource/models/rmua19_standard_robot) 进行二次编辑，加入了工业相机和激光雷达等传感器。
 
-- [pb2025_sentry_robot](./resource/xmacro/pb2025_sentry_robot.sdf.xmacro)
+- [simulation_robot](./resource/xmacro/simulation_robot.sdf.xmacro)
 
     搭载云台相机 industrial_camera 和激光雷达 rplidar_a2 和 Livox mid360，其中相机与 gimbal_pitch 轴固连，mid360 倾斜侧放与 chassis 固连。
 
@@ -107,7 +107,7 @@ robot_urdf_xml = urdf_generator.to_string()
 ```bash
 source install/setup.bash
 
-xmacro4sdf src/pb2025_robot_description/resource/xmacro/pb2025_sentry_robot.sdf.xmacro > src/pb2025_robot_description/resource/xmacro/pb2025_sentry_robot.sdf
+xmacro4sdf src/pb2025_robot_description/resource/xmacro/simulation_robot.sdf.xmacro > src/pb2025_robot_description/resource/xmacro/simulation_robot.sdf
 ```
 
 ## 3. Subscribed Topics
@@ -134,39 +134,32 @@ None.
 
 ## 5. Launch Arguments
 
-- `use_sim_time (bool, default: False)`
+- `use_sim_time` (bool, default: False)
 
     是否使用仿真时间。
 
-- `robot_name (str, default: "pb2025_sentry_robot")`
+- `robot_name` (str, default: "simulation_robot")
 
     机器人 XMacro 描述文件的**名字（无需后缀）**。描述文件应位于 `package://pb2025_robot_description/resource/xmacro` 目录下。
 
-- `robot_xmacro_file (str, default: "package://pb2025_robot_description/resource/xmacro/pb2025_sentry_robot.sdf.xmacro")`
+- `robot_xmacro_file` (str, default: "[simulation_robot.sdf.xmacro](./resource/xmacro/simulation_robot.sdf.xmacro)")
 
     机器人 XMacro 描述文件的**绝对路径**。本参数的优先级高于 `robot_name`，即若设置了 `robot_xmacro_file`，则 `robot_name` 参数无效。若未设置 `robot_xmacro_file`，则使用 `robot_name` 参数并自动补全路径作为 `robot_xmacro_file` 的值。
 
-- `source_list (array of strings, default: "['serial/gimbal_joint_state']")`
+- `params_file` (str, default: [robot_description.yaml](./params/robot_description.yaml))
 
-    该数组中的每个字符串代表一个话题名称。对于每个字符串，创建对 `sensor_msgs/msg/JointStates` 类型的命名话题的订阅。发布到该话题将更新 `joint_states` 中指定的关节状态。
-
-- `offset_timestamp` (double, default: 0.0)
-
-    用于调整 JointState 时间戳的偏移量，对于串口通信的云台位姿等数据，可能存在极小的延迟影响自动瞄准系统的性能，通过此参数可以调整时间戳。  
-    Related PR: [Add offset-timestamp param #109](https://github.com/ros/joint_state_publisher/pull/109)
-
-- `rviz_config_file (str, default: "package://pb2025_robot_description/rviz/visualize_robot.rviz")`
+- `rviz_config_file` (str, default: [visualize_robot.rviz](./rviz/visualize_robot.rviz))
 
     RViz 配置文件路径。
 
-- `use_rviz (bool, default: True)`
+- `use_rviz` (bool, default: True)
 
     是否启动 RViz 可视化界面。
 
-- `use_respawn (bool, default: False)`
+- `use_respawn` (bool, default: False)
 
     是否在节点退出时尝试重启节点。
 
-- `log_level (str, default: "info")`
+- `log_level` (str, default: "info")
 
     日志级别。

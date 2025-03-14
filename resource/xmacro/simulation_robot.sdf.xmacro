@@ -5,15 +5,22 @@
     <xmacro_include uri="model://rplidar_a2/model.sdf.xmacro" />
     <xmacro_include uri="model://mid360/model.sdf.xmacro" />
     <xmacro_include uri="model://industrial_camera/model.sdf.xmacro" />
-    <xmacro_include uri="model://rmua19_standard_robot/rmua19_standard_robot.def.xmacro" />
+    <xmacro_include uri="model://rm25_example_robot/rm25_example_robot.def.xmacro" />
     <!--property defination-->
     <xmacro_define_value name="global_initial_color" value="none" />
     <xmacro_define_value name="global_armor_sticker_type" value="num3" />
+    <!-- 底盘距离水平地面的高度 -->
+    <xmacro_define_value name="chassis_height" value="0.076" />
+    <!-- gimbal_yaw 相对于底盘的 z 轴安装偏移 -->
+    <xmacro_define_value name="gimbal_yaw_height" value="0.1376" />
+    <!-- gimbal_pitch 相对于 gimbal_yaw 的高度差 -->
+    <xmacro_define_value name="gimbal_pitch_height" value="0.16" />
+
     <!--pb2025_sentry_robot model-->
     <model name="pb2025_sentry_robot">
 
         <pose>0 0 0.15 0 0 0</pose>
-        <xmacro_block name="rmua19_standard_robot" sticker_type="${global_armor_sticker_type}"/>
+        <xmacro_block name="rm25_example_robot" sticker_type="${global_armor_sticker_type}" chassis_height="${chassis_height}" gimbal_yaw_height="${gimbal_yaw_height}" gimbal_pitch_height="${gimbal_pitch_height}"/>
         <!--rplidar a2-->
         <xmacro_block name="rplidar_a2" prefix="front_" parent="chassis" pose="0.155 0 0.1 0 0 0" update_rate="10" samples="400" visualize="true"/>
         <!--livox-->
