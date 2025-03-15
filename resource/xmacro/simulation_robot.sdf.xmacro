@@ -16,8 +16,8 @@
     <!-- gimbal_pitch 相对于 gimbal_yaw 的高度差 -->
     <xmacro_define_value name="gimbal_pitch_height" value="0.16" />
 
-    <!--pb2025_sentry_robot model-->
-    <model name="pb2025_sentry_robot">
+    <!--simulation_robot model-->
+    <model name="simulation_robot">
 
         <pose>0 0 0.15 0 0 0</pose>
         <xmacro_block name="rm25_example_robot" sticker_type="${global_armor_sticker_type}" chassis_height="${chassis_height}" gimbal_yaw_height="${gimbal_yaw_height}" gimbal_pitch_height="${gimbal_pitch_height}"/>
