@@ -22,7 +22,7 @@
         <pose>0 0 0.15 0 0 0</pose>
         <xmacro_block name="rm25_example_robot" sticker_type="${global_armor_sticker_type}" chassis_height="${chassis_height}" gimbal_yaw_height="${gimbal_yaw_height}" gimbal_pitch_height="${gimbal_pitch_height}"/>
         <!--livox-->
-        <xmacro_block name="livox" prefix="front_" parent="chassis" pose="0.0496 0.0936 0.435 -${pi/12} 0 0" update_rate="20" samples="1875"/>
+        <xmacro_block name="livox" prefix="front_" parent="gimbal_yaw" pose="-0.0496 0.136 0.435 -${pi/6} 0 0" update_rate="20" samples="1875"/>
         <!--industrial camera-->
         <xmacro_block name="industrial_camera" prefix="front_" parent="gimbal_pitch" pose="0.1 0 0.045 0 0 0" update_rate="30" horizontal_fov="1" width="1920" height="1080"/>
 
